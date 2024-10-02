@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>PHAT_STORE</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <wrapper>
+        <header class="logical_block">
+            <div class="nav_icon"><img src="/img/header/hamburger.png"></div>
+            <div class="nav_icon"><img src="/img/header/search.png"></div>
+            <div class="phat_logo"><img src="/img/logos/header_logo.jpg"></div>
+            <div class="nav_icon"><img src="/img/header/admin.png"></div>
+            <div class="nav_icon" sec:authorize="!isAuthenticated()"><a href="/login"><img src="/img/header/lock.png"></a></div>
+            <div class="nav_icon" sec:authorize="isAuthenticated()"><a href="/profile"><img src="/img/header/admin.png"></a></div>
+
+        </header>
+        <main>
+            <div class="shop">
+                <div class="categories">
+                    <th:block th:each="category: ${categories}">
+                        <a>
+                            <div class="category">
+                                <div class="category_img">
+                                    <img th:src="@{'/img/categories/' + ${category.name} + '.jpg'}">
+                                </div>
+                                <div class="category_caption">
+                                    [[${category.name}]]
+                                </div>
+                            </div>
+                        </a>
+                    </th:block>
+                </div>
+                <div class="brands"></div>
+            </div>
+            <div class="logo">
+                <img src="/img/logos/main_logo.jpg">
+            </div>
+        </main>
+    </wrapper>
+</body>
+</html>

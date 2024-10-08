@@ -35,4 +35,11 @@ public class Item extends BaseEntity {
     public Item() {
         positions = new HashSet<>();
     }
+
+    public boolean isInStock() {
+        return !positions.stream()
+                .filter(position -> position.getAmount() > 0)
+                .findFirst()
+                .isEmpty();
+    }
 }
